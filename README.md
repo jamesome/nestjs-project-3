@@ -71,3 +71,42 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## CLI
+
+```bash
+#install
+$ nest new project-name
+
+# gRpc
+$ pnpm i --save @nestjs/microservices @grpc/grpc-js @grpc/proto-loader ts-proto
+
+$ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts-proto_out=./ --ts_proto_opt=
+nesetJs=true ./proto/auth.proto
+
+# 타입스크립트 경로 읽기 위한 패키지
+$ pnpm i --save-dev tsconfig-paths
+
+# Schema validation
+# config에 추한 환경변수가 유효햐는 체크하는 모듈
+$ pnpm install class-validator class-transformer joi
+
+# .env 파일
+$ pnpm i --save @nestjs/config
+
+# jwt
+$ pnpm install --save @nestjs/jwt
+
+# swagger
+$ pnpm install --save @nestjs/swagger
+
+# swagger 보안
+$ pnpm install express-basic-auth
+
+# env 파일 읽기
+$ pnpm i dotenv
+
+# test
+$ pnpm install --save @nestjs/test
+
+```
