@@ -81,8 +81,9 @@ $ nest new project-name
 # gRpc
 $ pnpm i --save @nestjs/microservices @grpc/grpc-js @grpc/proto-loader ts-proto
 
-$ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts-proto_out=./ --ts_proto_opt=
-nesetJs=true ./proto/auth.proto
+# For MAC
+# brew install protobuf
+$ protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=nestJs=true ./proto/auth.proto
 
 # 타입스크립트 경로 읽기 위한 패키지
 $ pnpm i --save-dev tsconfig-paths
