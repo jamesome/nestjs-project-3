@@ -31,6 +31,7 @@ export class UsersService implements OnModuleInit {
   }
 
   findAll(): Users {
+    console.log('findAll');
     return { users: this.users };
   }
 

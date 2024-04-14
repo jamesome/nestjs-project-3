@@ -20,6 +20,7 @@ export class UsersController implements UserServiceController {
   }
 
   findAllUsers() {
+    console.log('findAllUsers');
     return this.usersService.findAll();
   }
 

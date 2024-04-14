@@ -110,4 +110,6 @@ $ pnpm i dotenv
 # test
 $ pnpm install --save @nestjs/test
 
+# 외부의 요청은 RestApi로.
+# 내부의 요청은 Grpc로.
 ```

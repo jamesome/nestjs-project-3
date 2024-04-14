@@ -1,5 +1,6 @@
 import {
   CreateUserDto,
+  PaginationDto,
   USER_SERVICE_NAME,
   UpdateUserDto,
   UserServiceClient,
@@ -7,6 +8,7 @@ import {
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { AUTH_SERVICE } from './constants';
 import { ClientGrpc } from '@nestjs/microservices';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -20,22 +22,40 @@ export class UsersService implements OnModuleInit {
   }
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    return this.usersService.createUser(createUserDto);
   }
 
   findAll() {
-    return `This action returns all users`;
+    console.log(2222);
+    return this.usersService.findAllUsers({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    return this.usersService.findOneUser({ id });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(id: string, updateUserDto: UpdateUserDto) {
+    return this.usersService.updateUser({ id, ...updateUserDto });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(id: string) {
+    return this.usersService.removeUser({ id });
+  }
+
+  emailUsers() {
+    const users$ = new ReplaySubject<PaginationDto>();
+    users$.next({ page: 0, skip: 25 });
+    users$.next({ page: 1, skip: 25 });
+    users$.next({ page: 2, skip: 25 });
+    users$.next({ page: 3, skip: 25 });
+
+    users$.complete();
+
+    let chunkNumber = 1;
+
+    this.usersService.queryUsers(users$).subscribe((users) => {
+      console.log('chunk', chunkNumber, users);
+      chunkNumber += 1;
+    });
   }
 }
